@@ -2,6 +2,20 @@
 
 These steps assume a fresh **Ubuntu 22.04/24.04** Hostinger VPS with SSH access and your domain's DNS **A record** already pointing to the VPS IP. (If you chose a VPS template with a control panel such as CloudPanel, create a *PHP site* there with document root `…/public` and skip the nginx/PHP/certbot parts.)
 
+## Fast path — one script
+
+On the fresh VPS (as root, or with `sudo`), after pointing your domain's A record at the server:
+
+```bash
+git clone https://github.com/genghix-techhh/Job-Pilot-Ai.git /tmp/jobpilot-src
+sudo DOMAIN=jobs.example.com LE_EMAIL=you@example.com bash /tmp/jobpilot-src/deploy/install-vps.sh
+cd /var/www/jobpilot && sudo -u www-data php artisan app:create-owner     # you type the password
+```
+
+(If the repository is private, clone with a GitHub token or deploy key, or `scp` the folder up and run the script from it with `REPO=` pointing at your remote.)
+
+The script installs PHP/nginx/MySQL/Node, creates the database with a random password, clones the app to `/var/www/jobpilot`, builds it, writes `.env`, sets up nginx, the cron line, the firewall and HTTPS, then tells you to create your owner login. It is safe to re-run to update (it keeps `.env` and data). Everything below is the same thing done by hand, if you prefer.
+
 Replace `jobs.example.com` and paths as needed. Run as a sudo-capable user, not root, where possible.
 
 ## 1. System packages
