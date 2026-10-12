@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+    :root { color-scheme: light; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { @apply bg-slate-50 text-slate-800 antialiased; }
+    [x-cloak] { display: none !important; }
+    :focus-visible { outline: 2px solid var(--color-amber-500); outline-offset: 2px; }
+    ::selection { background: var(--color-amber-200); }
+}
+
+@layer components {
+    /* ---------- buttons ---------- */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-3.5 py-2 text-sm font-semibold transition
+               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500
+               disabled:cursor-not-allowed disabled:opacity-50;
+    }
+    .btn-primary { @apply bg-slate-900 text-white shadow-sm hover:bg-slate-700; }
+    .btn-accent { @apply bg-amber-500 text-slate-950 shadow-sm hover:bg-amber-400; }
+    .btn-secondary { @apply bg-white text-slate-700 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50; }
+    .btn-danger { @apply bg-rose-600 text-white shadow-sm hover:bg-rose-500; }
+    .btn-danger-outline { @apply bg-white text-rose-700 shadow-sm ring-1 ring-inset ring-rose-300 hover:bg-rose-50; }
+    .btn-ghost { @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900; }
+    .btn-sm { @apply px-2.5 py-1.5 text-xs; }
+
+    /* ---------- forms ---------- */
+    .input {
+        @apply block w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300
+               placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-amber-500 disabled:bg-slate-100 disabled:text-slate-500;
+    }
+    textarea.input { @apply leading-relaxed; }
+    select.input { @apply pr-8; }
+    .label { @apply mb-1 block text-sm font-medium text-slate-700; }
+    .hint { @apply mt-1 text-xs text-slate-500; }
+    .error { @apply mt-1 text-xs font-medium text-rose-600; }
+    .check { @apply h-4 w-4 rounded border-slate-300 accent-amber-500; }
+
+    /* ---------- surfaces ---------- */
+    .card { @apply rounded-xl border border-slate-200 bg-white shadow-sm; }
+    .card-pad { @apply p-5; }
+    .h-section { @apply text-base font-semibold text-slate-900; }
+    .table-wrap { @apply overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm; }
+    .table-base { @apply min-w-full divide-y divide-slate-200 text-sm; }
+    .table-base th { @apply whitespace-nowrap bg-slate-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500; }
+    .table-base td { @apply px-4 py-3 align-top; }
+    .table-base tbody { @apply divide-y divide-slate-100; }
+
+    /* ---------- nav ---------- */
+    .nav-link {
+        @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
+    }
+    .nav-link[aria-current='page'] { @apply bg-amber-50 text-amber-900 ring-1 ring-inset ring-amber-200; }
+    .nav-link[aria-current='page'] svg { @apply text-amber-600; }
+
+    /* readable long-form text pulled from job posts / CVs */
+    .prose-plain { @apply whitespace-pre-line break-words text-sm leading-relaxed text-slate-700; }
+    .doc-box { @apply whitespace-pre-wrap break-words rounded-lg bg-slate-50 p-4 font-mono text-[13px] leading-relaxed text-slate-800 ring-1 ring-inset ring-slate-200; }
+}
